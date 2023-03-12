@@ -18,8 +18,10 @@ const Match = (props) => {
         'stage':props.tour_stage,
         'player_1_result': data.player_1_result,
         'player_2_result': data.player_2_result,
+        'tour_id': props.tour_id
       },
-      success: function() {   
+      success: function() {
+
         window.location.reload();  
     }
     });

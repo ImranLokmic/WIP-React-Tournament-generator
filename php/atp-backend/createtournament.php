@@ -2,7 +2,7 @@
 
 include 'ini.php';
 
-
+$dropold = $pdo->query('TRUNCATE TABLE `matches`');
 
 class Tournament
 {

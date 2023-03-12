@@ -30,6 +30,7 @@ const Draw = () => {
       {users.map((user, key) => (
         <Match
           key={key}
+          tour_id={user.tournament_id}
           match_id={user.match_id}
           tour_stage={user.tournament_stage}
           player_1={user.player_1}
