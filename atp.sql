@@ -89,7 +89,7 @@ CREATE TABLE `players` (
 --
 
 INSERT INTO `players` (`player_id`, `player_name`, `player_points`) VALUES
-(1, 'Coric', 45),
+(1, 'Coric', 0),
 (2, 'Cilic', 0),
 (3, 'Medvedev', 0),
 (4, 'Djokovic', 0),
