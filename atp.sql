@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2023 at 03:34 PM
+-- Generation Time: Mar 13, 2023 at 09:42 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -42,12 +42,31 @@ INSERT INTO `current_week` (`id`, `current_week`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `current_year`
+--
+
+CREATE TABLE `current_year` (
+  `id` int(11) NOT NULL,
+  `current_year` int(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `current_year`
+--
+
+INSERT INTO `current_year` (`id`, `current_year`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `matches`
 --
 
 CREATE TABLE `matches` (
   `match_id` int(8) NOT NULL,
   `tournament_id` int(8) NOT NULL,
+  `match_year` int(11) NOT NULL,
   `tournament_stage` varchar(255) NOT NULL,
   `player_1` varchar(255) NOT NULL,
   `player_2` varchar(255) NOT NULL,
@@ -65,6 +84,7 @@ CREATE TABLE `matches` (
 CREATE TABLE `old_matches` (
   `match_id` int(8) NOT NULL,
   `tournament_id` int(8) NOT NULL,
+  `match_year` int(8) NOT NULL,
   `tournament_stage` varchar(255) NOT NULL,
   `player_1` varchar(255) NOT NULL,
   `player_2` varchar(255) NOT NULL,
@@ -81,70 +101,83 @@ CREATE TABLE `old_matches` (
 CREATE TABLE `players` (
   `player_id` int(8) NOT NULL,
   `player_name` varchar(255) NOT NULL,
-  `player_points` int(255) NOT NULL
+  `player_points` int(255) NOT NULL,
+  `w1` int(8) DEFAULT 0,
+  `w2` int(8) DEFAULT 0,
+  `w3` int(8) DEFAULT 0,
+  `w4` int(8) DEFAULT 0,
+  `w5` int(8) DEFAULT 0,
+  `w6` int(8) DEFAULT 0,
+  `w7` int(8) DEFAULT 0,
+  `w8` int(8) DEFAULT 0,
+  `w9` int(8) DEFAULT 0,
+  `w10` int(8) DEFAULT 0,
+  `w11` int(8) DEFAULT 0,
+  `w12` int(8) DEFAULT 0,
+  `w13` int(8) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `players`
 --
 
-INSERT INTO `players` (`player_id`, `player_name`, `player_points`) VALUES
-(1, 'Coric', 0),
-(2, 'Cilic', 0),
-(3, 'Medvedev', 0),
-(4, 'Djokovic', 0),
-(5, 'Nadal', 0),
-(6, 'Federer', 0),
-(7, 'Zverev', 0),
-(8, 'Tsitsipas', 0),
-(9, 'Thiem', 0),
-(10, 'Berrettini', 0),
-(11, 'Alcaraz', 0),
-(12, 'Ruud', 0),
-(13, 'Auger-Aliassime', 0),
-(14, 'Norrie', 0),
-(15, 'Hurkacz', 0),
-(16, 'Rublev', 0),
-(17, 'Fritz', 0),
-(18, 'Sinner', 0),
-(19, 'Murray', 0),
-(20, 'Wawrinka', 0),
-(21, 'Kyrgios', 0),
-(22, 'Carreno Busta', 0),
-(23, 'Schwartzman', 0),
-(24, 'Bautista Agut', 0),
-(25, 'Dimitrov', 0),
-(26, 'De Minaur', 0),
-(27, 'Shapovalov', 0),
-(28, 'Evans', 0),
-(29, 'Monfils', 0),
-(30, 'Tiafoe', 0),
-(31, 'Opelka', 0),
-(32, 'Musetti', 0),
-(33, 'Khachanov', 0),
-(34, 'Karatsev', 0),
-(35, 'Brooksby', 0),
-(36, 'Isner', 0),
-(37, 'Korda', 0),
-(38, 'Fognini', 0),
-(39, 'Goffin', 0),
-(40, 'Kokkinakis', 0),
-(41, 'Garin', 0),
-(42, 'Gasquet', 0),
-(43, 'Verdasco', 0),
-(44, 'Sock', 0),
-(45, 'Paire', 0),
-(46, 'Simon', 0),
-(47, 'Nishikori', 0),
-(48, 'Lopez', 0),
-(49, 'Karlovic', 0),
-(50, 'Edmund', 0),
-(51, 'Raonic', 0),
-(52, 'Del Potro', 0),
-(53, 'Tsonga', 0),
-(54, 'Rune', 0),
-(55, 'Van Rijthoven', 0),
-(56, 'Davidovich Fokina', 0);
+INSERT INTO `players` (`player_id`, `player_name`, `player_points`, `w1`, `w2`, `w3`, `w4`, `w5`, `w6`, `w7`, `w8`, `w9`, `w10`, `w11`, `w12`, `w13`) VALUES
+(1, 'Korda', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(2, 'Raonic', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 'Goffin', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(4, 'Van Rijthoven', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(5, 'Coric', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(6, 'Cilic', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(7, 'Medvedev', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(8, 'Djokovic', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(9, 'Nadal', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(10, 'Federer', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(11, 'Zverev', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(12, 'Tsitsipas', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(13, 'Thiem', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(14, 'Berrettini', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(15, 'Alcaraz', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(16, 'Ruud', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(17, 'Auger-Aliassime', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(18, 'Norrie', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(19, 'Hurkacz', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(20, 'Rublev', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(21, 'Fritz', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(22, 'Sinner', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(23, 'Murray', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(24, 'Wawrinka', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(25, 'Kyrgios', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(26, 'Carreno Busta', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(27, 'Schwartzman', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(28, 'Bautista Agut', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(29, 'Dimitrov', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(30, 'De Minaur', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(31, 'Shapovalov', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(32, 'Evans', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(33, 'Monfils', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(34, 'Tiafoe', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(35, 'Opelka', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(36, 'Musetti', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(37, 'Khachanov', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(38, 'Karatsev', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(39, 'Brooksby', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(40, 'Isner', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(41, 'Fognini', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(42, 'Kokkinakis', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(43, 'Garin', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(44, 'Gasquet', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(45, 'Verdasco', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(46, 'Sock', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(47, 'Paire', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(48, 'Simon', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(49, 'Nishikori', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(50, 'Lopez', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(51, 'Karlovic', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(52, 'Edmund', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(53, 'Del Potro', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(54, 'Tsonga', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(55, 'Rune', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(56, 'Davidovich Fokina', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -190,6 +223,12 @@ ALTER TABLE `current_week`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `current_year`
+--
+ALTER TABLE `current_year`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `matches`
 --
 ALTER TABLE `matches`
@@ -224,6 +263,12 @@ ALTER TABLE `current_week`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `current_year`
+--
+ALTER TABLE `current_year`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `matches`
 --
 ALTER TABLE `matches`
@@ -233,7 +278,7 @@ ALTER TABLE `matches`
 -- AUTO_INCREMENT for table `old_matches`
 --
 ALTER TABLE `old_matches`
-  MODIFY `match_id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `match_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `players`

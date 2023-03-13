@@ -41,7 +41,7 @@ const Match = (props) => {
         <div className="self-center text-xs">
           Round: {props.tour_stage} Match: {props.match_id}
         </div>
-        <div className="self-center">
+        <div className="self-center text-sm">
           <label htmlFor={props.player_1 + props.match_id}>
             {props.player_1}
           </label>
@@ -74,7 +74,7 @@ const Match = (props) => {
           </button>}
           
         </div>
-        <div className="self-center">
+        <div className="self-center text-sm">
           <label htmlFor={props.player_2 + props.match_id}>
             {props.player_2}
           </label>

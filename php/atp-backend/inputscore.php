@@ -37,40 +37,44 @@ $tournament_rating_q = $pdo->prepare("SELECT tournament_rating FROM tournaments 
 $tournament_rating_q->execute();
 $tournament_rating = $tournament_rating_q->fetch(PDO::FETCH_COLUMN);
 
+$current_week_q = $pdo->prepare("SELECT current_year FROM current_year");
+$current_week_q->execute();
+$current_week = $current_week_q->fetch(PDO::FETCH_COLUMN);
+$week= 'w' . strval($current_week);
 //Point assignment based on tournament rating and stage of a match
 if ($tournament_rating == 2000) {
     switch ($stage) {
         case 1:
             break;
         case 2:
-            $query = $pdo->prepare("UPDATE players SET player_points=player_points+90 WHERE player_name='" . $loser . "' ");
+            $query = $pdo->prepare("UPDATE players SET `{$week}`=90 WHERE player_name='" . $loser . "' ");
             $query->execute();
             $query->fetch();
             break;
         case 3:
-            $query = $pdo->prepare("UPDATE players SET player_points=player_points+180 WHERE player_name='" . $loser . "' ");
+            $query = $pdo->prepare("UPDATE players SET `{$week}`=180 WHERE player_name='" . $loser . "' ");
             $query->execute();
             $query->fetch();
             break;
         case 4:
-            $query = $pdo->prepare("UPDATE players SET player_points=player_points+360 WHERE player_name='" . $loser . "' ");
+            $query = $pdo->prepare("UPDATE players SET `{$week}`=360 WHERE player_name='" . $loser . "' ");
             $query->execute();
             $query->fetch();
             break;
         case 5:
-            $query = $pdo->prepare("UPDATE players SET player_points=player_points+720 WHERE player_name='" . $loser . "' ");
+            $query = $pdo->prepare("UPDATE players SET `{$week}`=720 WHERE player_name='" . $loser . "' ");
             $query->execute();
             $query->fetch();
             break;
         case 6:
-            $query = $pdo->prepare("UPDATE players SET player_points=player_points+1200 WHERE player_name='" . $loser . "' ");
+            $query = $pdo->prepare("UPDATE players SET `{$week}`=1200 WHERE player_name='" . $loser . "' ");
             $query->execute();
             $query->fetch();
             break;
     }
 
     if ($stage == 6) {
-        $query = $pdo->prepare("UPDATE players SET player_points=player_points+2000 WHERE player_name='" . $winner . "' ");
+        $query = $pdo->prepare("UPDATE players SET `{$week}`=2000 WHERE player_name='" . $winner . "' ");
         $query->execute();
         $query->fetch();
     }
@@ -79,34 +83,34 @@ if ($tournament_rating == 2000) {
         case 1:
             break;
         case 2:
-            $query = $pdo->prepare("UPDATE players SET player_points=player_points+45 WHERE player_name='" . $loser . "' ");
+            $query = $pdo->prepare("UPDATE players SET `{$week}`=45 WHERE player_name='" . $loser . "' ");
             $query->execute();
             $query->fetch();
             break;
         case 3:
-            $query = $pdo->prepare("UPDATE players SET player_points=player_points+90 WHERE player_name='" . $loser . "' ");
+            $query = $pdo->prepare("UPDATE players SET `{$week}`=90 WHERE player_name='" . $loser . "' ");
             $query->execute();
             $query->fetch();
             break;
         case 4:
-            $query = $pdo->prepare("UPDATE players SET player_points=player_points+180 WHERE player_name='" . $loser . "' ");
+            $query = $pdo->prepare("UPDATE players SET `{$week}`=180 WHERE player_name='" . $loser . "' ");
             $query->execute();
             $query->fetch();
             break;
         case 5:
-            $query = $pdo->prepare("UPDATE players SET player_points=player_points+360 WHERE player_name='" . $loser . "' ");
+            $query = $pdo->prepare("UPDATE players SET `{$week}`=360 WHERE player_name='" . $loser . "' ");
             $query->execute();
             $query->fetch();
             break;
         case 6:
-            $query = $pdo->prepare("UPDATE players SET player_points=player_points+600 WHERE player_name='" . $loser . "' ");
+            $query = $pdo->prepare("UPDATE players SET `{$week}`=600 WHERE player_name='" . $loser . "' ");
             $query->execute();
             $query->fetch();
             break;
     }
 
     if ($stage == 6) {
-        $query = $pdo->prepare("UPDATE players SET player_points=player_points+1000 WHERE player_name='" . $winner . "' ");
+        $query = $pdo->prepare("UPDATE players SET `{$week}`=1000 WHERE player_name='" . $winner . "' ");
         $query->execute();
         $query->fetch();
     }
