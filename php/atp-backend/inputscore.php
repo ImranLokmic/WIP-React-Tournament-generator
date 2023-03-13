@@ -2,8 +2,7 @@
 
 include 'ini.php';
 
-
-
+//Getting POST DATA
 $match_id = $_POST['match_id'];
 $stage = $_POST['stage'];
 $player_1 = $_POST['player_1'];
@@ -12,6 +11,19 @@ $player_1_result = $_POST['player_1_result'];
 $player_2_result = $_POST['player_2_result'];
 $tournament_id = $_POST['tour_id'];
 
+
+
+//Checking if the match is already inputed
+$check_set = $pdo->prepare("SELECT is_set FROM matches WHERE match_id='" . $match_id . "'");
+$check_set->execute();
+$is_set = $check_set->fetch(PDO::FETCH_COLUMN);
+
+if ($is_set == 1) {
+    exit();
+} else {
+}
+
+//Setting Winner and Loser Variable
 if ($player_1_result > $player_2_result) {
     $winner = $player_1;
     $loser = $player_2;
@@ -20,12 +32,13 @@ if ($player_1_result > $player_2_result) {
     $loser = $player_2;
 };
 
+//Setting Tournament rating
+$tournament_rating_q = $pdo->prepare("SELECT tournament_rating FROM tournaments WHERE tournament_id='" . $tournament_id . "'");
+$tournament_rating_q->execute();
+$tournament_rating = $tournament_rating_q->fetch(PDO::FETCH_COLUMN);
 
-$tournament_rating = $pdo->prepare("SELECT tournament_rating FROM tournaments WHERE tournament_id='" . $tournament_id . "'");
-$tournament_rating->execute();
-$tournament_rating->fetch();
-
-if ($tournament_rating = 2000) {
+//Point assignment based on tournament rating and stage of a match
+if ($tournament_rating == 2000) {
     switch ($stage) {
         case 1:
             break;
@@ -61,7 +74,7 @@ if ($tournament_rating = 2000) {
         $query->execute();
         $query->fetch();
     }
-} elseif ($tournament_rating = 1000) {
+} elseif ($tournament_rating == 1000) {
     switch ($stage) {
         case 1:
             break;
@@ -99,10 +112,18 @@ if ($tournament_rating = 2000) {
     }
 }
 
+//Updating results
 $query = $pdo->prepare("UPDATE matches SET player_1_result='" . $player_1_result . "', player_2_result='" . $player_2_result . "' WHERE match_id='" . $match_id . "' ");
 $query->execute();
 $query->fetch();
 
+//Setting is_set variable to 1
+$set_set = $pdo->prepare("UPDATE matches SET is_set=1 WHERE match_id='" . $match_id . "' ");
+$set_set->execute();
+$set_set->fetch();
+
+//Pushing the winner to the next stage of a bracket
+//Since its 56 players seeded bracket - First round has 8 bye's therefore its 48 matches first round
 if ($stage == 1 && $match_id % 2 == 0) {
     switch ($match_id) {
         case 2:
@@ -136,6 +157,7 @@ if ($stage == 1 && $match_id % 2 == 0) {
     }
 } elseif ($stage == 1 &&  $match_id % 2 != 0) {
     switch ($match_id) {
+
         case 1:
         case 3:
         case 5:

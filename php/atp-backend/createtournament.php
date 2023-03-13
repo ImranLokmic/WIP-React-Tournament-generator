@@ -2,6 +2,7 @@
 
 include 'ini.php';
 
+//Droping data from matches to create new bracket
 $dropold = $pdo->query('TRUNCATE TABLE `matches`');
 
 class Tournament
@@ -20,6 +21,7 @@ class Tournament
         $tournament_participants_prep = $this->pdo->prepare("SELECT player_name FROM players WHERE player_id>8");
         $tournament_participants_prep->execute();
         $tournament_participants = $tournament_participants_prep->fetchAll(PDO::FETCH_COLUMN);
+        //randomizing non seeded players in a array so the draw is random
         shuffle($tournament_participants);
         for ($i = 1; $i <= 24; $i++) {
             $query = $this->pdo->prepare("INSERT INTO matches (`match_id`, `tournament_id`, `tournament_stage`, `player_1`, `player_2`, `player_1_result`, `player_2_result`) VALUES ('" . $i.  "', '" . $tournament_name["tournament_id"] . "' , 1 ,'" . array_pop($tournament_participants) . "' ,'" . array_pop($tournament_participants) . "' , 0,0)");
@@ -29,6 +31,7 @@ class Tournament
         $tournament_seeds_prep = $this->pdo->prepare("SELECT player_name FROM players WHERE player_id<9");
         $tournament_seeds_prep->execute();
         $tournament_seeds = $tournament_seeds_prep->fetchAll(PDO::FETCH_COLUMN);
+        //Switch loop for seeded players in specific matches of round 2
         for ($i = 25; $i <= 40; $i++) {
             switch ($i) {
                 case 25:

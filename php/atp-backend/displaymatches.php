@@ -7,7 +7,7 @@ class Matches{
         $this->pdo = $pdo;
     }
     public function displayMatch(){
-        $query = $this->pdo->prepare("SELECT match_id,tournament_stage,tournament_id,player_1, player_2, player_1_result, player_2_result FROM matches ORDER BY tournament_stage");
+        $query = $this->pdo->prepare("SELECT match_id,tournament_stage,tournament_id,player_1, player_2, player_1_result, player_2_result, is_set FROM matches ORDER BY tournament_stage");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }

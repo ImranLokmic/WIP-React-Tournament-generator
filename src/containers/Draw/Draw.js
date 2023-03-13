@@ -27,9 +27,11 @@ const Draw = () => {
   }
   return (
     <>
+      <div className="grid">
       {users.map((user, key) => (
         <Match
           key={key}
+          lock = {user.is_set}
           tour_id={user.tournament_id}
           match_id={user.match_id}
           tour_stage={user.tournament_stage}
@@ -39,6 +41,7 @@ const Draw = () => {
           player_2_result={user.player_2_result}
         />
       ))}
+      </div>
       <button
         onClick={save}
         className="self-center text-white bg-gradient-to-r from-red-400 via-red-400 to-red-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-600 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-600/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
