@@ -27,20 +27,22 @@ const Draw = () => {
   }
   return (
     <>
-      <div className="grid">
-      {users.map((user, key) => (
-        <Match
-          key={key}
-          lock = {user.is_set}
-          tour_id={user.tournament_id}
-          match_id={user.match_id}
-          tour_stage={user.tournament_stage}
-          player_1={user.player_1}
-          player_2={user.player_2}
-          player_1_result={user.player_1_result}
-          player_2_result={user.player_2_result}
-        />
-      ))}
+      <div className="grid grid-cols-6 grid-flow-col">
+        {users.map((user, key) => (
+          <Match
+            key={key}
+            lock={user.is_set}
+            tour_id={user.tournament_id}
+            match_id={user.match_id}
+            tour_stage={user.tournament_stage}
+            player_1={user.player_1}
+            player_2={user.player_2}
+            player_1_result={user.player_1_result}
+            player_2_result={user.player_2_result}
+            getUsers={getUsers}
+            className={user.match_id < 25 ? 'col-start-1 ' : user.match_id>24 && user.match_id<41 ? 'col-start-2 ' : user.match_id>40 && user.match_id<49 ? 'col-start-3' : user.match_id>48 && user.match_id<53 ? 'col-start-4' : user.match_id>52 && user.match_id<55 ? 'col-start-5' : 'col-start-6' }
+          />
+        ))}
       </div>
       <button
         onClick={save}
